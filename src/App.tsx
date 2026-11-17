@@ -14,6 +14,7 @@ import { ExcelTableView } from './components/ExcelTableView';
 import { HelpVerificationModal } from './components/HelpVerificationModal';
 import { LorieLoganSpeechCard } from './components/LorieLoganSpeechCard';
 import { RealRateChartView } from './components/RealRateChartView';
+import { RStarModelsModal } from './components/RStarModelsModal';
 import { Compass, Sparkles, TrendingUp, Sliders, Cpu, BarChart3, Info, Settings, HelpCircle } from 'lucide-react';
 
 export default function App() {
@@ -34,6 +35,8 @@ export default function App() {
   const [showHelpModal, setShowHelpModal] = useState<boolean>(false);
   // Active main view tab ('master' or 'real-rate')
   const [activeMainView, setActiveMainView] = useState<'master' | 'real-rate'>('master');
+  // Toggle for 8 r-star models modal explorer
+  const [showRStarModelsModal, setShowRStarModelsModal] = useState<boolean>(false);
 
   // Load initial indicators from the backend Express endpoints
   const fetchIndicators = async () => {
@@ -266,7 +269,10 @@ export default function App() {
         ) : (
           <>
             {/* Lorie Logan Nov 2026 Speech Card */}
-            <LorieLoganSpeechCard onLoadLoganScenario={handleLoadLoganScenario} />
+            <LorieLoganSpeechCard
+              onLoadLoganScenario={handleLoadLoganScenario}
+              onOpenRStarModelsModal={() => setShowRStarModelsModal(true)}
+            />
 
         {/* KPI Cards section for currently locked date */}
         {selectedPoint && (
@@ -453,6 +459,13 @@ export default function App() {
       <HelpVerificationModal 
         isOpen={showHelpModal} 
         onClose={() => setShowHelpModal(false)} 
+        onOpenRStarModelsModal={() => setShowRStarModelsModal(true)}
+      />
+
+      {/* 8 R-Star Models Interactive Explorer Modal */}
+      <RStarModelsModal
+        isOpen={showRStarModelsModal}
+        onClose={() => setShowRStarModelsModal(false)}
       />
     </div>
   );

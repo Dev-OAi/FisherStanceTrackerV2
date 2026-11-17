@@ -24,9 +24,10 @@ import {
 interface HelpVerificationModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenRStarModelsModal?: () => void;
 }
 
-export function HelpVerificationModal({ isOpen, onClose }: HelpVerificationModalProps) {
+export function HelpVerificationModal({ isOpen, onClose, onOpenRStarModelsModal }: HelpVerificationModalProps) {
   if (!isOpen) return null;
 
   return (
@@ -159,6 +160,29 @@ export function HelpVerificationModal({ isOpen, onClose }: HelpVerificationModal
                     </a>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* SECTION 3: The 8 Published R-Star Models */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-emerald-600" />
+                <span>3. The 8 Published R-Star Models (1.0%–1.85% Range)</span>
+              </h4>
+              <div className="bg-white border border-slate-200 rounded-lg p-4 space-y-3 text-xs shadow-xs">
+                <p className="leading-relaxed text-slate-600 font-sans">
+                  In Dallas Fed President Lorie Logan's speech, she noted: <em>&ldquo;Across eight published models, estimates of the neutral real interest rate currently range from 1 to 1.85 percent.&rdquo;</em> These models span Federal Reserve System staff models and academic frameworks (HLW, DGGT, Bayesian VARs, term structure models, and DSGE frameworks).
+                </p>
+                {onOpenRStarModelsModal && (
+                  <button
+                    type="button"
+                    onClick={onOpenRStarModelsModal}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer shadow-sm"
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    <span>Launch Interactive 8 R-Star Models Explorer</span>
+                  </button>
+                )}
               </div>
             </div>
 

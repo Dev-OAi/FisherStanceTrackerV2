@@ -4,14 +4,15 @@
  */
 
 import React from 'react';
-import { Landmark, ExternalLink, Sliders, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { Landmark, ExternalLink, Sliders, BookOpen } from 'lucide-react';
 import { MacroDataPoint } from '../types';
 
 interface LorieLoganSpeechCardProps {
   onLoadLoganScenario: () => void;
+  onOpenRStarModelsModal?: () => void;
 }
 
-export const LorieLoganSpeechCard: React.FC<LorieLoganSpeechCardProps> = ({ onLoadLoganScenario }) => {
+export const LorieLoganSpeechCard: React.FC<LorieLoganSpeechCardProps> = ({ onLoadLoganScenario, onOpenRStarModelsModal }) => {
   return (
     <div className="bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 text-white rounded-xl p-6 shadow-xl border border-slate-800 space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
@@ -77,13 +78,25 @@ export const LorieLoganSpeechCard: React.FC<LorieLoganSpeechCardProps> = ({ onLo
           <span className="text-[11px] text-slate-400">
             Clicking the button loads President Logan's November 2026 data point into the Scenario Simulator and chart.
           </span>
-          <button
-            onClick={onLoadLoganScenario}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-all cursor-pointer shadow-md shrink-0"
-          >
-            <Sliders className="w-3.5 h-3.5" />
-            <span>Load Nov 2026 Logan Preset</span>
-          </button>
+          <div className="flex items-center gap-2 shrink-0">
+            {onOpenRStarModelsModal && (
+              <button
+                type="button"
+                onClick={onOpenRStarModelsModal}
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs uppercase tracking-wider rounded-lg transition-all cursor-pointer border border-slate-700 font-mono"
+              >
+                <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Explore 8 R-Star Models</span>
+              </button>
+            )}
+            <button
+              onClick={onLoadLoganScenario}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-all cursor-pointer shadow-md"
+            >
+              <Sliders className="w-3.5 h-3.5" />
+              <span>Load Nov 2026 Logan Preset</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
